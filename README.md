@@ -21,10 +21,22 @@ A beautiful, modern NixOS configuration featuring:
 ## 📋 Prerequisites
 
 1. A working NixOS installation with flakes enabled
-2. `git` installed
-3. A backup of your current configuration
+2. A backup of your current configuration (optional but recommended)
 
-## 🚀 Installation
+## ⚡ Quick Install (One-Liner)
+
+```bash
+nix-shell -p git curl --run "curl -fsSL https://raw.githubusercontent.com/ST-2/nixos-caelestia-hyprland/main/install.sh | bash"
+```
+
+This single command:
+- Temporarily loads `git` and `curl` via nix-shell
+- Downloads and runs the install script
+- Auto-detects your hostname and username
+- Generates hardware configuration
+- No pre-installed dependencies required!
+
+## 🚀 Manual Installation
 
 ### Step 1: Clone this configuration
 
