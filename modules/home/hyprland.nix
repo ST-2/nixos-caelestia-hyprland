@@ -285,9 +285,9 @@ in {
         "$mod, Tab, changegroupactive,"
 
         # === Screenshots (using grim + slurp) ===
-        ", Print, exec, grim -g "$(slurp)" - | wl-copy"
+        ", Print, exec, grim -g \"$(slurp)\" - | wl-copy"
         "SHIFT, Print, exec, grim - | wl-copy"
-        "$mod, Print, exec, grim -g "$(slurp)" ~/Pictures/Screenshots/$(date +%Y%m%d_%H%M%S).png"
+        "$mod, Print, exec, grim -g \"$(slurp)\" ~/Pictures/Screenshots/$(date +%Y%m%d_%H%M%S).png"
 
         # === Lock Screen ===
         "$mod SHIFT, L, exec, hyprlock"
