@@ -95,12 +95,12 @@ sudo reboot
 | Keybind | Action |
 |---------|--------|
 | `Super + Return` | Open terminal (kitty) |
-| `Super + Q` | Close window |
+| `Super + W` | Close window |
 | `Super + Shift + Q` | Exit Hyprland |
 | `Super + Space` | Open Caelestia launcher |
 | `Super + D` | Toggle Caelestia dashboard |
 | `Super + S` | Toggle Caelestia session menu |
-| `Super + V` | Toggle floating |
+| `Super + T` | Toggle floating |
 | `Super + F` | Toggle fullscreen |
 
 ### Window Navigation (Vim-style)

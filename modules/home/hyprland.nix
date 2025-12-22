@@ -217,11 +217,11 @@ in {
       bind = [
         # === Core Bindings ===
         "$mod, Return, exec, $terminal"
-        "$mod, Q, killactive,"
+        "$mod, W, killactive,"
         "$mod SHIFT, Q, exit,"
         "$mod, E, exec, $fileManager"
         "$mod, B, exec, $browser"
-        "$mod, V, togglefloating,"
+        "$mod, T, togglefloating,"
         "$mod, F, fullscreen, 0"
         "$mod SHIFT, F, fullscreen, 1"  # Maximize
         "$mod, P, pseudo,"
