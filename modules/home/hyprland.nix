@@ -98,17 +98,13 @@ in {
         # Blur configuration
         blur = {
           enabled = true;
-          xray = true;
           size = 8;
           passes = 4;
-          new_optimizations = true;
           noise = 0.02;
           contrast = 0.9;
           brightness = 0.85;
           vibrancy = 0.2;
           vibrancy_darkness = 0.5;
-          popups = true;
-          popups_ignorealpha = 0.2;
         };
 
         # Shadow configuration
@@ -118,8 +114,6 @@ in {
           render_power = 3;
           color = "rgba(1a1a2e66)";
           color_inactive = "rgba(1a1a2e33)";
-          offset = "0 4";
-          scale = 1.0;
         };
 
         # Dimming inactive windows
@@ -198,7 +192,7 @@ in {
         enable_swallow = true;
         swallow_regex = "^(kitty|foot|Alacritty)$";
         focus_on_activate = true;
-        # new_window_takes_over_fullscreen = 2; # Removed in newer Hyprland
+        # new_window_takes_over_fullscreen = 2; # Removed # Removed in newer Hyprland
       };
 
       # ========================================
