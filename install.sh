@@ -32,15 +32,10 @@ CONFIG_DIR="${HOME}/.config/nixos"
 HOSTNAME=$(hostname)
 USERNAME=$(whoami)
 
-# Detect boot disk (the disk containing the root partition)
-BOOT_DISK=$(lsblk -ndo pkname $(findmnt -n -o SOURCE /) 2>/dev/null || echo "sda")
-BOOT_DISK="/dev/${BOOT_DISK}"
-
 echo -e "${BLUE}Configuration:${NC}"
 echo "  Config directory: ${CONFIG_DIR}"
 echo "  Hostname: ${HOSTNAME}"
 echo "  Username: ${USERNAME}"
-echo "  Boot disk: ${BOOT_DISK}"
 echo ""
 
 # Backup existing config
@@ -59,22 +54,27 @@ cd "${CONFIG_DIR}"
 echo -e "${GREEN}Generating hardware configuration...${NC}"
 sudo nixos-generate-config --show-hardware-config > hosts/default/hardware-configuration.nix
 
-# Update hostname in configuration
+# Update hostname in flake.nix (the nixosConfigurations key)
 echo -e "${GREEN}Configuring hostname: ${HOSTNAME}${NC}"
-sed -i "s/caelestia-pc/${HOSTNAME}/g" flake.nix
+sed -i "s/caelestia-pc = nixpkgs/${HOSTNAME} = nixpkgs/" flake.nix
+sed -i "s/\"caelestia-pc\" with your hostname/\"${HOSTNAME}\" with your hostname/" flake.nix
+
+# Update hostname in configuration.nix
 sed -i "s/hostName = \"caelestia-pc\"/hostName = \"${HOSTNAME}\"/" hosts/default/configuration.nix
 
-# Update username in configuration
+# Update username in flake.nix (home-manager users.USERNAME)
 echo -e "${GREEN}Configuring username: ${USERNAME}${NC}"
-sed -i "s/users.user/${USERNAME}/g" flake.nix
-sed -i "s/user@caelestia-pc/${USERNAME}@${HOSTNAME}/g" flake.nix
-sed -i "s/users.users.user/users.users.${USERNAME}/" hosts/default/configuration.nix
+sed -i "s/users\.user = import/users.${USERNAME} = import/" flake.nix
+sed -i "s/\"user\" with your username/\"${USERNAME}\" with your username/" flake.nix
+sed -i "s/user@caelestia-pc/${USERNAME}@${HOSTNAME}/" flake.nix
+
+# Update username in configuration.nix
+sed -i "s/users\.users\.user/users.users.${USERNAME}/" hosts/default/configuration.nix
+sed -i "s/\"user\" to your username/\"${USERNAME}\" to your username/" hosts/default/configuration.nix
+
+# Update username in home manager config
 sed -i "s/username = \"user\"/username = \"${USERNAME}\"/" modules/home/default.nix
 sed -i "s|homeDirectory = \"/home/user\"|homeDirectory = \"/home/${USERNAME}\"|" modules/home/default.nix
-
-# Update GRUB boot disk
-echo -e "${GREEN}Configuring boot disk: ${BOOT_DISK}${NC}"
-sed -i "s|device = \"/dev/sda\"|device = \"${BOOT_DISK}\"|" hosts/default/configuration.nix
 
 # Create wallpaper directory
 mkdir -p ~/Pictures/Wallpapers
@@ -89,7 +89,7 @@ echo "  3. Update modules/home/hyprland.nix with your monitor config"
 echo "  4. Update modules/home/packages.nix with your git name/email"
 echo "  5. Build and switch:"
 echo ""
-echo -e "     ${YELLOW}sudo nixos-rebuild switch --flake ${CONFIG_DIR}#${HOSTNAME}${NC}"
+echo -e "     ${YELLOW}nix-shell -p git --run 'sudo nixos-rebuild switch --flake ${CONFIG_DIR}#${HOSTNAME}'${NC}"
 echo ""
 echo -e "${BLUE}Default password:${NC} changeme (change it after login with 'passwd')"
 echo ""

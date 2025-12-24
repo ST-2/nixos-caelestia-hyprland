@@ -7,19 +7,11 @@
   ];
 
   # ========================================
-  # BOOTLOADER
+  # BOOTLOADER (systemd-boot for UEFI systems)
   # ========================================
-  # Using GRUB for broader compatibility (works on both BIOS/MBR and UEFI)
-  # If you're on UEFI and prefer systemd-boot, uncomment below and comment out GRUB section
-  # boot.loader = {
-  #   systemd-boot.enable = true;
-  #   efi.canTouchEfiVariables = true;
-  # };
-  
-  boot.loader.grub = {
-    enable = true;
-    device = "/dev/sda";  # Change this to your boot disk (e.g., /dev/vda, /dev/nvme0n1)
-    useOSProber = true;
+  boot.loader = {
+    systemd-boot.enable = true;
+    efi.canTouchEfiVariables = true;
   };
 
   # ========================================
