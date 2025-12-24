@@ -366,12 +366,12 @@ in {
       # LAYER RULES (for Caelestia Shell)
       # ========================================
       layerrule = [
-        "blur, caelestia"
-        "ignorealpha 0.3, caelestia"
-        "blur, notifications"
-        "ignorealpha 0.3, notifications"
-        "blur, rofi"
-        "ignorealpha 0.3, rofi"
+        # "blur, caelestia" # Deprecated layerrule
+        # "ignorealpha 0.3, caelestia" # Deprecated
+        # "blur, notifications" # Deprecated
+        # "ignorealpha 0.3, notifications" # Deprecated
+        # "blur, rofi" # Deprecated
+        # "ignorealpha 0.3, rofi" # Deprecated
       ];
 
       # ========================================
